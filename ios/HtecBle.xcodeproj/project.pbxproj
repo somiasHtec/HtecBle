@@ -16,6 +16,7 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* HtecBleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* HtecBleTests.m */; };
+		30703C2225EFA7B300A56493 /* HtecBluetooth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30703C2125EFA7B300A56493 /* HtecBluetooth.swift */; };
 		333AD20C4C6A8EB6FCFDD163 /* libPods-HtecBle-HtecBleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66CE16FB7145FE1838942405 /* libPods-HtecBle-HtecBleTests.a */; };
 		38D568740560E31701335312 /* libPods-HtecBle-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F0DD680CB3F72EB4A516C31D /* libPods-HtecBle-tvOS.a */; };
 		6B871D547C018606DD273E54 /* libPods-HtecBle-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA2D80E6091F99D8484AFA6 /* libPods-HtecBle-tvOSTests.a */; };
@@ -52,6 +53,8 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = HtecBle/main.m; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* HtecBle-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HtecBle-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* HtecBle-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HtecBle-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		30703C2025EFA7B200A56493 /* HtecBle-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HtecBle-Bridging-Header.h"; sourceTree = "<group>"; };
+		30703C2125EFA7B300A56493 /* HtecBluetooth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtecBluetooth.swift; sourceTree = "<group>"; };
 		41DCE9E1E147FAE28AA52C1C /* Pods-HtecBle-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HtecBle-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-HtecBle-tvOSTests/Pods-HtecBle-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		42A0A092F64E5EDEC3FE36E3 /* Pods-HtecBle-HtecBleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HtecBle-HtecBleTests.debug.xcconfig"; path = "Target Support Files/Pods-HtecBle-HtecBleTests/Pods-HtecBle-HtecBleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		66CE16FB7145FE1838942405 /* libPods-HtecBle-HtecBleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HtecBle-HtecBleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,6 +135,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				30703C2125EFA7B300A56493 /* HtecBluetooth.swift */,
+				30703C2025EFA7B200A56493 /* HtecBle-Bridging-Header.h */,
 			);
 			name = HtecBle;
 			sourceTree = "<group>";
@@ -148,7 +153,6 @@
 				B66EE345FFBAAF6F5905382D /* Pods-HtecBle-tvOSTests.debug.xcconfig */,
 				41DCE9E1E147FAE28AA52C1C /* Pods-HtecBle-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -210,6 +214,7 @@
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
 				960D0AF8BD3AEB06A4754A94 /* [CP] Copy Pods Resources */,
+				14482AA493C4F2AD7F2B2981 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -232,6 +237,7 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				06548E05DA29988CA633E826 /* [CP] Copy Pods Resources */,
+				01A8D42E8C45698C3D26B0FA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -294,7 +300,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1240;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -377,6 +383,24 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
+		01A8D42E8C45698C3D26B0FA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HtecBle/Pods-HtecBle-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HtecBle/Pods-HtecBle-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		06548E05DA29988CA633E826 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -393,6 +417,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HtecBle/Pods-HtecBle-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		14482AA493C4F2AD7F2B2981 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HtecBle-HtecBleTests/Pods-HtecBle-HtecBleTests-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HtecBle-HtecBleTests/Pods-HtecBle-HtecBleTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
@@ -570,6 +612,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				30703C2225EFA7B300A56493 /* HtecBluetooth.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -610,6 +653,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 42A0A092F64E5EDEC3FE36E3 /* Pods-HtecBle-HtecBleTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -633,6 +677,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 745CDE917288ED70DE48871D /* Pods-HtecBle-HtecBleTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = HtecBleTests/Info.plist;
@@ -666,6 +711,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = HtecBle;
+				SWIFT_OBJC_BRIDGING_HEADER = "HtecBle-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -688,6 +734,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = HtecBle;
+				SWIFT_OBJC_BRIDGING_HEADER = "HtecBle-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

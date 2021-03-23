@@ -29,14 +29,15 @@ export default StyleSheet.create({
     width: width,
     paddingHorizontal: 5,
     justifyContent: 'flex-end',
-    marginBottom: 20,
+    marginHorizontal: 5,
   },
   devicesWrapper: {
     flexDirection: 'row',
+    justifyContent: 'center',
   },
   deviceImage: {
     height: 160,
-    width: width * 0.5,
+    width: width * 0.45,
   },
   borderBlue: {
     ...borderStyle,

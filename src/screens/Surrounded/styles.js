@@ -1,16 +1,12 @@
 import {StyleSheet} from 'react-native';
 
+import {COLORS} from '../../assets';
+
 export default StyleSheet.create({
   container: {
+    flex: 1,
     alignItems: 'center',
-  },
-  itemsWrapper: {
-    width: '100%',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  itemsSpacing: {
-    justifyContent: 'space-around',
+    backgroundColor: COLORS.white,
+    paddingTop: 30,
   },
 });

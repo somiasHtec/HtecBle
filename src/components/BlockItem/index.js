@@ -1,15 +1,13 @@
 import React from 'react';
 import {TouchableOpacity, Text} from 'react-native';
 
-import {ICONS} from '../../assets';
+import {ICONS, COLORS} from '../../assets';
 import styles from './styles';
 
 const Block = (props) => {
   const {color, icon} = props;
 
-  const borderColor = {borderColor: color};
-
-  console.log('ICON -->>', icon);
+  const borderColor = {borderColor: COLORS.block[color]};
 
   return (
     <TouchableOpacity style={[styles.container, borderColor]}>

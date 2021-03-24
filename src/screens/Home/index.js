@@ -1,12 +1,12 @@
 import React from 'react';
-import {View, Image, TouchableOpacity, SafeAreaView} from 'react-native';
+import { View, Image, TouchableOpacity, SafeAreaView } from 'react-native';
 
-import {IMAGES} from '../../assets';
+import { IMAGES } from '../../assets';
 import styles from './styles';
 
 const Home = (props) => {
   const {
-    navigation: {navigate},
+    navigation: { navigate },
   } = props;
 
   return (

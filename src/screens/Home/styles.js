@@ -1,8 +1,8 @@
-import {StyleSheet, Dimensions} from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
-import {COLORS} from '../../assets';
+import { COLORS } from '../../assets';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const borderStyle = {
   borderLeftWidth: 5,

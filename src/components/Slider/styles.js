@@ -1,6 +1,6 @@
-import {StyleSheet, Dimensions} from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
-const {width} = Dimensions.get('screen');
+const { width } = Dimensions.get('screen');
 
 export default StyleSheet.create({
   sliderWrapper: {

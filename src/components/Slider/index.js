@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {View, Text} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text } from 'react-native';
 
-import {default as CommunitySlider} from '@react-native-community/slider';
+import { default as CommunitySlider } from '@react-native-community/slider';
 
-import {COLORS} from '../../assets';
+import { COLORS } from '../../assets';
 import styles from './styles';
 
 const Slider = () => {

@@ -1,13 +1,13 @@
 import React from 'react';
-import {Text, TouchableOpacity} from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 
-import {COLORS} from '../../assets';
+import { COLORS } from '../../assets';
 import styles from './styles';
 
 const BlockLabel = (props) => {
-  const {onPress, label, color} = props;
+  const { onPress, label, color } = props;
 
-  const labelBgColor = color && {backgroundColor: COLORS.block[color]};
+  const labelBgColor = color && { backgroundColor: COLORS.block[color] };
 
   return (
     <TouchableOpacity

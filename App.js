@@ -1,8 +1,8 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import Home from './src/screens/Home';
 import Spread from './src/screens/Spread';
@@ -19,7 +19,7 @@ const App = () => {
         <Stack.Screen
           name="Home"
           component={Home}
-          options={{headerShown: false}}
+          options={{ headerShown: false }}
         />
         <Stack.Screen name="Spread" component={Spread} />
         <Stack.Screen name="Stimulated" component={Stimulated} />

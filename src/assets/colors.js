@@ -1,6 +1,8 @@
 export default {
   white: '#ffffff',
   black: '#000000',
+  grey: '#747474',
+  lightGrey: '#C3C3C3',
   block: {
     red: '#C02828',
     blue: '#5B8FDA',
@@ -17,4 +19,6 @@ export default {
   slider: {
     maxTrack: '#E8C1C5',
   },
+  lightGreen: '#B7D6D4',
+  darkGreen: '#388175',
 };

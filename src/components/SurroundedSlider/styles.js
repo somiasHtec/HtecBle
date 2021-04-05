@@ -1,29 +1,33 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import { COLORS } from '../../assets';
 
 const { width } = Dimensions.get('screen');
 
 export default StyleSheet.create({
   sliderWrapper: {
+    flex: 2,
     justifyContent: 'center',
-    marginTop: 10,
-    marginBottom: 20,
   },
   sliderStyle: {
     width: width * 0.85,
     height: 40,
     marginVertical: 15,
   },
-  valueWrapper: {
+  volumeWrapper: {
     flexDirection: 'row',
     alignSelf: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'space-between',
     width: width * 0.55,
   },
-  boldText: {
-    color: COLORS.grey,
-    fontWeight: 'bold',
-    fontSize: 16,
+  lightText: {
+    color: '#747474',
+  },
+  timeContainer: {
+    width: width * 0.85,
+    flexDirection: 'row',
+  },
+  timeWrapper: {
+    width: '50%',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
 });

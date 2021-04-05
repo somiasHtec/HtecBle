@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text } from 'react-native';
 
 import { default as CommunitySlider } from '@react-native-community/slider';
@@ -6,37 +6,28 @@ import { default as CommunitySlider } from '@react-native-community/slider';
 import { COLORS } from '../../assets';
 import styles from './styles';
 
-const Slider = () => {
-  const [sliderValue, setSliderValue] = useState(0);
+const Slider = (props) => {
+  const { name, sliderValue, setSliderValue, maxValue } = props;
 
   const handleSliderValue = (value) => setSliderValue(value);
 
+  console.log('SLIDER VALUE -->>', sliderValue);
+
   return (
     <View style={styles.sliderWrapper}>
-      <View style={styles.volumeWrapper}>
-        <Text style={styles.lightText}>Volume</Text>
-        <Text> {sliderValue} </Text>
+      <View style={styles.valueWrapper}>
+        <Text style={styles.boldText}>{name}</Text>
+        <Text style={styles.boldText}> {sliderValue} </Text>
       </View>
 
       <CommunitySlider
         style={styles.sliderStyle}
         minimumValue={0}
-        maximumValue={30}
+        maximumValue={maxValue}
         onValueChange={handleSliderValue}
         maximumTrackTintColor={COLORS.slider.maxTrack}
         step={1}
       />
-
-      <View style={styles.timeContainer}>
-        <View style={styles.timeWrapper}>
-          <Text style={styles.lightText}>Last</Text>
-          <Text>0 s</Text>
-        </View>
-        <View style={styles.timeWrapper}>
-          <Text style={styles.lightText}>Avg</Text>
-          <Text>0 s</Text>
-        </View>
-      </View>
     </View>
   );
 };

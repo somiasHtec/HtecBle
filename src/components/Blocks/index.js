@@ -8,7 +8,7 @@ import { bankData } from '../../data/bank';
 
 import styles from './styles';
 
-const Blocks = () => {
+const Blocks = ({ writeToPeripheral, peripheralId }) => {
   const [orderPosition, setOrderPosition] = useState(1);
   const [banksPosition, setBanksPosition] = useState(0);
   const [currentBank, setCurrentBank] = useState(bankData[0]);
@@ -43,20 +43,50 @@ const Blocks = () => {
           onPress={handleIconPosition}
           label={`Set ${orderPosition}`}
         />
-        <BlockItem position="F1" icon={currentBank[0]} color="red" />
+        <BlockItem
+          writeToPeripheral={writeToPeripheral}
+          peripheralId={peripheralId}
+          position={`F${currentBank[0].position}`}
+          icon={currentBank[0].icon}
+          color="red"
+        />
         <BlockItemLabel
           onPress={handleBankChange}
           label={`Bank ${banksPosition + 1}`}
         />
       </View>
       <View style={[styles.itemsWrapper, styles.itemsSpacing]}>
-        <BlockItem position="L1" icon={currentBank[1]} color="blue" />
-        <BlockItem position="C1" icon={currentBank[2]} color="grey" />
-        <BlockItem position="R1" icon={currentBank[3]} color="yellow" />
+        <BlockItem
+          writeToPeripheral={writeToPeripheral}
+          peripheralId={peripheralId}
+          position={`L${currentBank[1].position}`}
+          icon={currentBank[1].icon}
+          color="blue"
+        />
+        <BlockItem
+          writeToPeripheral={writeToPeripheral}
+          peripheralId={peripheralId}
+          position={`C${currentBank[2].position}`}
+          icon={currentBank[2].icon}
+          color="grey"
+        />
+        <BlockItem
+          writeToPeripheral={writeToPeripheral}
+          peripheralId={peripheralId}
+          position={`R${currentBank[3].position}`}
+          icon={currentBank[3].icon}
+          color="yellow"
+        />
       </View>
       <View style={styles.itemsWrapper}>
         <BlockItemLabel label="OK" color="green" />
-        <BlockItem position="r1" icon={currentBank[4]} color="green" />
+        <BlockItem
+          writeToPeripheral={writeToPeripheral}
+          peripheralId={peripheralId}
+          position={`r${currentBank[4].position}`}
+          icon={currentBank[4].icon}
+          color="green"
+        />
         <BlockItemLabel label="NOT OK" color="redNotOk" />
       </View>
     </View>

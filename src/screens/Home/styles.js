@@ -25,11 +25,9 @@ export default StyleSheet.create({
     resizeMode: 'contain',
   },
   devicesContainer: {
-    height: height * 0.7,
-    width: width,
-    paddingHorizontal: 5,
-    justifyContent: 'flex-end',
+    height: height * 0.6,
     marginHorizontal: 5,
+    marginTop: 20,
   },
   devicesWrapper: {
     flexDirection: 'row',

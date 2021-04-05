@@ -52,7 +52,7 @@ const Home = (props) => {
       <View style={styles.wallpaperWrapper}>
         <Image source={IMAGES.voicetoys} style={styles.wallpaper} />
       </View>
-
+      {/* 
       <Button
         onPress={() => setTestMode('write')}
         title="Write"
@@ -64,7 +64,7 @@ const Home = (props) => {
         title="Read"
         color="#7748"
         accessibilityLabel="Read"
-      />
+      /> */}
 
       <View style={styles.devicesContainer}>
         <Button

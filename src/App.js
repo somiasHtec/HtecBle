@@ -18,6 +18,9 @@ const bleEmitter = new NativeEventEmitter(BleManagerModule);
 
 const Buffer = require('buffer/').Buffer;
 
+// TODO: Replace button and slider positions
+// TODO: Delete already scanned devices when scanning new
+
 const App = (props) => {
   const { navigation } = props;
 
@@ -158,6 +161,7 @@ const App = (props) => {
   };
 
   const writeToPeripheral = (peripheralId, payload) => {
+    console.log('PERIPHERAL Payload --->>>', payload);
     const serviceUUID = 'c15352c2-9fd7-11e9-a2a3-2a2ae2dbcce4';
     const charasteristicUUID = 'c1535498-9fd7-11e9-a2a3-2a2ae2dbcce4';
 
@@ -173,7 +177,7 @@ const App = (props) => {
     )
       .then((res) => {
         console.log('write response', res);
-        alert(`your "${payload}" is stored to the food bank. Thank you!`);
+        // alert(`your "${payload}" is stored to the food bank. Thank you!`);
       })
       .catch((error) => {
         console.log('write err', error);

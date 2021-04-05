@@ -7,14 +7,15 @@ import Slider from '../../components/SurroundedSlider';
 import styles from './styles';
 
 const Surrounded = (props) => {
-  console.log('PROPS -->>', props);
+  const { writeToPeripheral, peripheralId } = props.route.params;
+
+  const handlePeripheralWrite = (value) => {
+    writeToPeripheral(peripheralId, value);
+  };
   return (
     <View style={styles.container}>
-      <Blocks
-        writeToPeripheral={props.route.params.writeToPeripheral}
-        peripheralId={props.route.params.peripheralId}
-      />
-      <Slider />
+      <Blocks handlePeripheralWrite={handlePeripheralWrite} />
+      <Slider handlePeripheralWrite={handlePeripheralWrite} />
     </View>
   );
 };

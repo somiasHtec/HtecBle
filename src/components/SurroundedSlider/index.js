@@ -6,10 +6,13 @@ import { default as CommunitySlider } from '@react-native-community/slider';
 import { COLORS } from '../../assets';
 import styles from './styles';
 
-const Slider = () => {
+const Slider = ({ handlePeripheralWrite }) => {
   const [sliderValue, setSliderValue] = useState(0);
 
-  const handleSliderValue = (value) => setSliderValue(value);
+  const handleSliderValue = (value) => {
+    setSliderValue(value);
+    handlePeripheralWrite(`V${value}`);
+  };
 
   return (
     <View style={styles.sliderWrapper}>

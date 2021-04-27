@@ -38,7 +38,7 @@ const Stimulated = (props) => {
       );
     },
 
-    700,
+    100,
   );
 
   // Handlers

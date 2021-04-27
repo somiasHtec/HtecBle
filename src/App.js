@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   NativeEventEmitter,
   NativeModules,
@@ -16,8 +16,6 @@ import Devices from './const/devices';
 const BleManagerModule = NativeModules.BleManager;
 const bleEmitter = new NativeEventEmitter(BleManagerModule);
 
-const Buffer = require('buffer/').Buffer;
-
 // TODO: Replace button and slider positions
 // TODO: Delete already scanned devices when scanning new
 
@@ -29,7 +27,15 @@ const App = (props) => {
   const peripherals = new Map();
   const [testMode, setTestMode] = useState('write');
 
-  const startScan = () => {
+  // const onItemClick = useCallback(
+  //   (event) => {
+  //     console.log('You clicked ', event.currentTarget);
+  //   },
+  //   [term],
+  // );
+
+  const startScan = useCallback(() => {
+    console.log('Scanning ...');
     if (isScanning) {
       return;
     }
@@ -47,7 +53,28 @@ const App = (props) => {
       .catch((err) => {
         console.error(err);
       });
-  };
+  }, [isScanning, peripherals]);
+
+  // const startScan = () => {
+  //   console.log('Scanning ...');
+  //   if (isScanning) {
+  //     return;
+  //   }
+
+  //   // first, clear existing peripherals
+  //   peripherals.clear();
+  //   setList(Array.from(peripherals.values()));
+
+  //   // then re-scan it
+  //   BleManager.scan([], 3, true)
+  //     .then(() => {
+  //       console.log('Scanning...');
+  //       setIsScanning(true);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // };
 
   const handleDiscoverPeripheral = (peripheral) => {
     if (!peripheral.name) {
@@ -94,6 +121,8 @@ const App = (props) => {
   };
 
   useEffect(() => {
+    // startScan();
+
     BleManager.start({ showAlert: false });
 
     bleEmitter.addListener(
@@ -160,10 +189,16 @@ const App = (props) => {
     setList(Array.from(peripherals.values()));
   };
 
-  const writeToPeripheral = (peripheralId, payload) => {
+  const writeToPeripheral = (
+    peripheralId,
+    payload,
+    serviceUUID,
+    charasteristicUUID,
+  ) => {
+    // console.log('PERIPHERAL ID -->>', peripheralId);
+    // console.log('service uuid  -->>', serviceUUID);
+    // console.log('charasteristicUUID-->>', charasteristicUUID);
     console.log('PERIPHERAL Payload --->>>', payload);
-    const serviceUUID = 'c15352c2-9fd7-11e9-a2a3-2a2ae2dbcce4';
-    const charasteristicUUID = 'c1535498-9fd7-11e9-a2a3-2a2ae2dbcce4';
 
     const payloadBytes = stringToBytes(payload);
 
@@ -219,70 +254,6 @@ const App = (props) => {
               return p;
             });
           });
-
-          // test read and write data to peripheral
-          const serviceUUID = 'c15352c2-9fd7-11e9-a2a3-2a2ae2dbcce4';
-          const charasteristicUUID = 'c1535498-9fd7-11e9-a2a3-2a2ae2dbcce4';
-          // const serviceUUID = '4fafc201-1fb5-459e-8fcc-c5c9c331914b';
-          // const charasteristicUUID = 'beb5483e-36e1-4688-b7f5-ea07361b26a8';
-
-          // switch (testMode) {
-          //   case 'write':
-          //     writeToPeripheral(peripheral.id, serviceUUID, charasteristicUUID);
-          //     // ===== test write data
-          //     // const payload = 'pizza';
-          //     // const payloadBytes = stringToBytes(payload);
-          //     // console.log('payload:', payload);
-
-          //     // BleManager.write(
-          //     //   peripheral.id,
-          //     //   serviceUUID,
-          //     //   charasteristicUUID,
-          //     //   payloadBytes,
-          //     // )
-          //     //   .then((res) => {
-          //     //     console.log('write response', res);
-          //     //     alert(
-          //     //       `your "${payload}" is stored to the food bank. Thank you!`,
-          //     //     );
-          //     //   })
-          //     //   .catch((error) => {
-          //     //     console.log('write err', error);
-          //     //   });
-          //     break;
-
-          //   case 'read':
-          //     // ===== test read data
-          //     BleManager.read(peripheral.id, serviceUUID, charasteristicUUID)
-          //       .then((res) => {
-          //         console.log('read response', res);
-          //         if (res) {
-          //           const buffer = Buffer.from(res);
-          //           const data = buffer.toString();
-          //           console.log('data', data);
-          //           alert(`you have stored food "${data}"`);
-          //         }
-          //       })
-          //       .catch((error) => {
-          //         console.log('read err', error);
-          //         alert(error);
-          //       });
-          //     break;
-
-          //   case 'notify':
-          //     // ===== test subscribe notification
-          //     BleManager.startNotification(
-          //       peripheral.id,
-          //       serviceUUID,
-          //       charasteristicUUID,
-          //     ).then((res) => {
-          //       console.log('start notification response', res);
-          //     });
-          //     break;
-
-          //   default:
-          //     break;
-          // }
         });
       })
       .catch((error) => {

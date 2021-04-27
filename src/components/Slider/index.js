@@ -7,11 +7,7 @@ import { COLORS } from '../../assets';
 import styles from './styles';
 
 const Slider = (props) => {
-  const { name, sliderValue, setSliderValue, maxValue } = props;
-
-  const handleSliderValue = (value) => setSliderValue(value);
-
-  console.log('SLIDER VALUE -->>', sliderValue);
+  const { name, sliderValue, onValueChange, maxValue } = props;
 
   return (
     <View style={styles.sliderWrapper}>
@@ -24,7 +20,7 @@ const Slider = (props) => {
         style={styles.sliderStyle}
         minimumValue={0}
         maximumValue={maxValue}
-        onValueChange={handleSliderValue}
+        onValueChange={onValueChange}
         maximumTrackTintColor={COLORS.slider.maxTrack}
         step={1}
       />

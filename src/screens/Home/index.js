@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   View,
   Image,
@@ -6,27 +6,26 @@ import {
   SafeAreaView,
   FlatList,
   Button,
+  Text,
 } from 'react-native';
 
-import { IMAGES } from '../../assets';
 import styles from './styles';
 
-const data = [
-  { id: 1, name: 'Spread', border: 'borderBlue', img: 'spread' },
-  { id: 2, name: 'Stimulated', border: 'borderYellow', img: 'stimulated' },
-  { id: 3, name: 'Surrounded', border: 'borderGreen', img: 'surrounded' },
-  { id: 4, name: 'Jumped', border: 'borderRed', img: 'jumped' },
-];
+import { IMAGES } from '~/assets';
 
 const Home = (props) => {
   const {
     navigation: { navigate },
     listData,
     connectAndTestPeripheral,
-    setTestMode,
     startScan,
     writeToPeripheral,
   } = props;
+
+  useEffect(() => {
+    startScan();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const connectAndNavigate = (item) => {
     navigate(item.name, { peripheralId: item.id, writeToPeripheral });
@@ -39,9 +38,13 @@ const Home = (props) => {
     return (
       <TouchableOpacity
         onPress={() => connectAndNavigate(item)}
-        style={styles.borderGreen}>
+        style={styles.borderGreen}
+      >
         {item.name && (
-          <Image source={IMAGES[itemImage]} style={styles.deviceImage} />
+          <View>
+            <Text style={styles.deviceName}>{item.name}</Text>
+            <Image source={IMAGES[itemImage]} style={styles.deviceImage} />
+          </View>
         )}
       </TouchableOpacity>
     );
@@ -49,30 +52,17 @@ const Home = (props) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.wallpaperWrapper}>
+      <TouchableOpacity onPress={startScan} style={styles.wallpaperWrapper}>
         <Image source={IMAGES.voicetoys} style={styles.wallpaper} />
-      </View>
-      {/* 
-      <Button
-        onPress={() => setTestMode('write')}
-        title="Write"
-        color="#123850"
-        accessibilityLabel="Write"
-      />
-      <Button
-        onPress={() => setTestMode('read')}
-        title="Read"
-        color="#7748"
-        accessibilityLabel="Read"
-      /> */}
+      </TouchableOpacity>
 
       <View style={styles.devicesContainer}>
-        <Button
+        {/* <Button
           onPress={startScan}
           title="SCAN"
           color="#841584"
           accessibilityLabel="Start scan"
-        />
+        /> */}
         <FlatList
           data={listData}
           renderItem={renderItem}

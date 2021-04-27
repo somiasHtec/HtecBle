@@ -1,6 +1,8 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
-import { COLORS } from '../../assets';
+import { COLORS } from '~/assets';
+
+const { width } = Dimensions.get('screen');
 
 export default StyleSheet.create({
   container: {
@@ -12,5 +14,17 @@ export default StyleSheet.create({
     resizeMode: 'cover',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  switchWrapper: {
+    width: width * 0.5,
+    flexDirection: 'row',
+    marginBottom: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  switchSecondText: {
+    fontWeight: 'bold',
+    color: COLORS.grey,
+    fontSize: 16,
   },
 });

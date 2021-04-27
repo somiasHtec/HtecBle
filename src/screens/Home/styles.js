@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
-import { COLORS } from '../../assets';
+import { COLORS } from '~/assets';
 
 const { width, height } = Dimensions.get('window');
 
@@ -36,6 +36,12 @@ export default StyleSheet.create({
   deviceImage: {
     height: 160,
     width: width * 0.45,
+  },
+  deviceName: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 18,
+    color: COLORS.grey,
   },
   borderBlue: {
     ...borderStyle,

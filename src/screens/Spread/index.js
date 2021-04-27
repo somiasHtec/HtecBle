@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { View, ImageBackground, Switch } from 'react-native';
+import { View, Text, ImageBackground } from 'react-native';
 
 import Slider from '../../components/Slider';
+import Switch from '../../components/Switch';
 
-import { IMAGES, COLORS } from '../../assets';
+import { IMAGES } from '../../assets';
 import styles from './styles';
 
-const Spread = () => {
+const Spread = (props) => {
+  const { writeToPeripheral, peripheralId } = props.route.params;
+
   // Switch
   const [isEnabled, setIsEnabled] = useState(false);
 
@@ -18,33 +21,63 @@ const Spread = () => {
   // Handlers
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
+  // Spread ID's
+  const serviceUUID = 'c1534d9a-9fd7-11e9-a2a3-2a2ae2dbcce4';
+  const charasteristicUUID = 'c1535088-9fd7-11e9-a2a3-2a2ae2dbcce4';
+
+  // Handler to send data to device
+  const handlePeripheralWrite = (key, value, hook) => {
+    const valueToString = value.toString();
+
+    const stringifiedValue = JSON.stringify({ [key]: valueToString });
+
+    console.log('Stringified Value --->>>', stringifiedValue);
+    hook(value);
+    writeToPeripheral(
+      peripheralId,
+      stringifiedValue,
+      serviceUUID,
+      charasteristicUUID,
+    );
+  };
+
   return (
     <View style={styles.container}>
       <ImageBackground source={IMAGES.spread} style={styles.backgroundImage}>
-        <Switch
-          trackColor={{ false: COLORS.lightGrey, true: COLORS.lightGreen }}
-          thumbColor={isEnabled ? COLORS.darkGreen : COLORS.white}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={toggleSwitch}
-          value={isEnabled}
-        />
+        <View style={styles.switchWrapper}>
+          <Switch
+            label="Style"
+            toggleSwitch={toggleSwitch}
+            value={isEnabled}
+            labelBold={false}
+          />
+          <Text style={styles.switchSecondText}>
+            {isEnabled ? 'Digital' : 'Analog'}
+          </Text>
+        </View>
 
         <Slider
           name="Threshold"
           sliderValue={threshold}
-          setSliderValue={setThreshold}
+          onValueChange={(value) =>
+            handlePeripheralWrite('threshold', value, setThreshold)
+          }
           maxValue={40}
         />
         <Slider
           name="Sensitivity"
           sliderValue={sensitivity}
-          setSliderValue={setSensitivity}
+          onValueChange={(value) =>
+            handlePeripheralWrite('sensitivity', value, setSensitivity)
+          }
           maxValue={60}
         />
         <Slider
           name="Decay"
           sliderValue={decay}
-          setSliderValue={setDecay}
+          onValueChange={(value) =>
+            handlePeripheralWrite('decay', value, setDecay)
+          }
           maxValue={100}
         />
       </ImageBackground>

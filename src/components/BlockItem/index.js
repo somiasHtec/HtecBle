@@ -12,7 +12,8 @@ const Block = (props) => {
   return (
     <TouchableOpacity
       onPress={() => handlePeripheralWrite(position)}
-      style={[styles.container, borderColor]}>
+      style={[styles.container, borderColor]}
+    >
       <Text style={styles.iconStyle}>{ICONS[icon]}</Text>
     </TouchableOpacity>
   );

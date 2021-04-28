@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   NativeEventEmitter,
   NativeModules,
@@ -27,14 +27,7 @@ const App = (props) => {
   const peripherals = new Map();
   const [testMode, setTestMode] = useState('write');
 
-  // const onItemClick = useCallback(
-  //   (event) => {
-  //     console.log('You clicked ', event.currentTarget);
-  //   },
-  //   [term],
-  // );
-
-  const startScan = useCallback(() => {
+  const startScan = () => {
     console.log('Scanning ...');
     if (isScanning) {
       return;
@@ -53,39 +46,20 @@ const App = (props) => {
       .catch((err) => {
         console.error(err);
       });
-  }, [isScanning, peripherals]);
-
-  // const startScan = () => {
-  //   console.log('Scanning ...');
-  //   if (isScanning) {
-  //     return;
-  //   }
-
-  //   // first, clear existing peripherals
-  //   peripherals.clear();
-  //   setList(Array.from(peripherals.values()));
-
-  //   // then re-scan it
-  //   BleManager.scan([], 3, true)
-  //     .then(() => {
-  //       console.log('Scanning...');
-  //       setIsScanning(true);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // };
+  };
 
   const handleDiscoverPeripheral = (peripheral) => {
     if (!peripheral.name) {
       return;
     }
 
+    console.log('Peripheral name -->>', peripheral);
+
     if (
-      peripheral?.name === Devices.SURROUNDED ||
-      Devices.SPREAD ||
-      Devices.STIMULATED ||
-      Devices.JUMPED
+      peripheral?.name === 'Stimulated' ||
+      'Surrounded' ||
+      'Spread' ||
+      'Jumped'
     ) {
       peripherals.set(peripheral.id, peripheral);
       setList(Array.from(peripherals.values()));
@@ -195,11 +169,6 @@ const App = (props) => {
     serviceUUID,
     charasteristicUUID,
   ) => {
-    // console.log('PERIPHERAL ID -->>', peripheralId);
-    // console.log('service uuid  -->>', serviceUUID);
-    // console.log('charasteristicUUID-->>', charasteristicUUID);
-    console.log('PERIPHERAL Payload --->>>', payload);
-
     const payloadBytes = stringToBytes(payload);
 
     console.log('payload:', payload);
@@ -209,9 +178,9 @@ const App = (props) => {
       serviceUUID,
       charasteristicUUID,
       payloadBytes,
+      1000,
     )
       .then((res) => {
-        console.log('write response', res);
         // alert(`your "${payload}" is stored to the food bank. Thank you!`);
       })
       .catch((error) => {

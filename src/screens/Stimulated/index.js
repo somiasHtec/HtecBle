@@ -19,10 +19,12 @@ const Stimulated = (props) => {
   const [ledStatus, setLedStatus] = useState(false);
 
   const [sliders, setSliders] = useState({
-    vibHi: '0',
-    vibLo: '0',
-    ledHi: '0',
-    ledLo: '0',
+    vibhi: 0,
+    viblo: 0,
+    ledhi: 0,
+    ledlo: 0,
+    vib: 0,
+    led: 0,
   });
 
   // Debounce
@@ -46,34 +48,26 @@ const Stimulated = (props) => {
     setVibStatus((previousState) => !previousState);
 
     const vibVal = !vibStatus ? 1 : 0;
-    const stringifiedVib = JSON.stringify(vibVal);
 
-    writeToPeripheral(
-      peripheralId,
-      stringifiedVib,
-      ID.STIMULATED.serviceUUID,
-      ID.STIMULATED.charasteristicUUID,
-    );
+    handleSliders(vibVal, 'vib');
   };
   const toggleLedSwitch = () => {
     setLedStatus((previousState) => !previousState);
 
     const ledVal = !ledStatus ? 1 : 0;
-    const stringifiedLed = JSON.stringify(ledVal);
 
-    writeToPeripheral(
-      peripheralId,
-      stringifiedLed,
-      ID.STIMULATED.serviceUUID,
-      ID.STIMULATED.charasteristicUUID,
-    );
+    handleSliders(ledVal, 'led');
   };
 
   // Handler to send data to device
   const handleSliders = (value, key) => {
-    const valueToString = value.toString();
+    let spreadObject = {};
 
-    const spreadObject = { ...sliders, [key]: valueToString };
+    if (key === 'vib' || 'led') {
+      spreadObject = { ...sliders, [key]: !value ? 1 : 0 };
+    }
+
+    spreadObject = { ...sliders, [key]: value };
 
     setSliders(spreadObject);
     debounced(spreadObject);
@@ -100,26 +94,26 @@ const Stimulated = (props) => {
 
         <Slider
           name="VibHI"
-          sliderValue={sliders.vibHi}
-          onValueChange={(value) => handleSliders(value, 'vibHi')}
+          sliderValue={sliders.vibhi}
+          onValueChange={(value) => handleSliders(value, 'vibhi')}
           maxValue={255}
         />
         <Slider
           name="VibLo"
-          sliderValue={sliders.vibLo}
-          onValueChange={(value) => handleSliders(value, 'vibLo')}
+          sliderValue={sliders.viblo}
+          onValueChange={(value) => handleSliders(value, 'viblo')}
           maxValue={150}
         />
         <Slider
           name="LedHi"
-          sliderValue={sliders.ledHi}
-          onValueChange={(value) => handleSliders(value, 'ledHi')}
+          sliderValue={sliders.ledhi}
+          onValueChange={(value) => handleSliders(value, 'ledhi')}
           maxValue={255}
         />
         <Slider
           name="LedLo"
-          sliderValue={sliders.ledLo}
-          onValueChange={(value) => handleSliders(value, 'ledLo')}
+          sliderValue={sliders.ledlo}
+          onValueChange={(value) => handleSliders(value, 'ledlo')}
           maxValue={255}
         />
       </ImageBackground>

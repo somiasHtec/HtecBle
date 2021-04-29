@@ -23,6 +23,7 @@ const Slider = (props) => {
         onValueChange={onValueChange}
         maximumTrackTintColor={COLORS.slider.maxTrack}
         step={1}
+        value={sliderValue}
       />
     </View>
   );

@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, ImageBackground } from 'react-native';
+
+import BleManager from 'react-native-ble-manager';
 
 import { useDebouncedCallback } from 'use-debounce';
 
@@ -10,6 +12,8 @@ import { ID } from '~/const/devices';
 
 import { IMAGES } from '~/assets';
 import styles from './styles';
+
+const Buffer = require('buffer/').Buffer;
 
 const Stimulated = (props) => {
   const { writeToPeripheral, peripheralId } = props.route.params;
@@ -26,6 +30,40 @@ const Stimulated = (props) => {
     vib: 0,
     led: 0,
   });
+
+  console.log('sliders BEFORE -->>', sliders);
+
+  useEffect(() => {
+    const readPeripheral = () => {
+      console.log('I have been called');
+
+      BleManager.read(
+        peripheralId,
+        ID.STIMULATED.serviceUUID,
+        ID.STIMULATED.readUUID,
+      )
+        .then((readData) => {
+          // Success code
+
+          const buffer = Buffer.from(readData).toString();
+          const parsedData = JSON.parse(buffer);
+
+          setSliders(parsedData);
+
+          console.log('sliders after -->>', sliders);
+
+          console.log('Buffer -->>', buffer);
+          console.log('parsedData -->>', parsedData);
+        })
+        .catch((error) => {
+          // Failure code
+          console.log(error);
+        });
+    };
+
+    readPeripheral();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [peripheralId]);
 
   // Debounce
   const debounced = useDebouncedCallback(

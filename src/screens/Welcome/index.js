@@ -8,8 +8,9 @@ import {
   Text,
 } from 'react-native';
 
-import styles from './styles';
+import { useDebouncedCallback } from 'use-debounce';
 
+import styles from './styles';
 import { IMAGES } from '~/assets';
 
 const Home = (props) => {
@@ -23,12 +24,25 @@ const Home = (props) => {
 
   useEffect(() => {
     startScan();
+
+    return () => {
+      console.log('*** welcome screen umounted ***');
+    };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const deviceConnectDebounce = useDebouncedCallback(
+    (item) => {
+      navigate(item.name, { peripheralId: item.id, writeToPeripheral });
+    },
+
+    100,
+  );
+
   const connectAndNavigate = (item) => {
-    navigate(item.name, { peripheralId: item.id, writeToPeripheral });
     connectAndTestPeripheral(item);
+    deviceConnectDebounce(item);
   };
 
   const renderItem = ({ item }) => {
@@ -56,12 +70,6 @@ const Home = (props) => {
       </TouchableOpacity>
 
       <View style={styles.devicesContainer}>
-        {/* <Button
-          onPress={startScan}
-          title="SCAN"
-          color="#841584"
-          accessibilityLabel="Start scan"
-        /> */}
         <FlatList
           data={listData}
           renderItem={renderItem}

@@ -13,10 +13,16 @@ import { ID } from '~/const/devices';
 import { IMAGES } from '~/assets';
 import styles from './styles';
 
+import usePeripheral from '../../hooks/usePeripheral';
+
 const Buffer = require('buffer/').Buffer;
 
 const Stimulated = (props) => {
   const { writeToPeripheral, peripheralId } = props.route.params;
+
+  const { peripheralId: contextPeripheralId } = usePeripheral();
+
+  console.log('contextPeripheralId --->>>', contextPeripheralId);
 
   // Switch
   const [vibStatus, setVibStatus] = useState(false);
@@ -31,7 +37,7 @@ const Stimulated = (props) => {
     led: 0,
   });
 
-  console.log('sliders BEFORE -->>', sliders);
+  // console.log('sliders BEFORE -->>', sliders);
 
   useEffect(() => {
     const readPeripheral = () => {
@@ -46,14 +52,12 @@ const Stimulated = (props) => {
           // Success code
 
           const buffer = Buffer.from(readData).toString();
+
           const parsedData = JSON.parse(buffer);
 
+          console.log('Parsed data -->>', parsedData);
+
           setSliders(parsedData);
-
-          console.log('sliders after -->>', sliders);
-
-          console.log('Buffer -->>', buffer);
-          console.log('parsedData -->>', parsedData);
         })
         .catch((error) => {
           // Failure code
@@ -62,8 +66,30 @@ const Stimulated = (props) => {
     };
 
     readPeripheral();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [peripheralId]);
+
+    return () => {
+      console.log('**** Stimulated is Unmounted ****');
+
+      // BleManager.disconnect(peripheralId)
+      BleManager.disconnect(peripheralId)
+        .then(() => {
+          // Success code
+          console.log('Disconnected Stimulated -->>', peripheralId);
+        })
+        .catch((error) => {
+          // Failure code
+          console.log(error);
+        });
+    };
+  }, [
+    peripheralId,
+    sliders.led,
+    sliders.vib,
+    sliders.ledhi,
+    sliders.ledlo,
+    sliders.vibhi,
+    sliders.viblo,
+  ]);
 
   // Debounce
   const debounced = useDebouncedCallback(

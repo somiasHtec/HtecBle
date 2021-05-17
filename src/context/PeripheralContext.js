@@ -1,16 +1,21 @@
 import React, { useState, createContext } from 'react';
 
-const PeripheralContext = createContext({
+export const PeripheralContext = createContext({
   peripheralId: '',
-  setPeripheralId: () => {},
+  setPeripheralId: (id) => {},
+  peripheralConnected: false,
+  setIsPeripheralConnected: () => {},
 });
 
 const PeripheralProvider = ({ children }) => {
   const [peripheralId, setPeripheralId] = useState('');
+  const [peripheralConnected, setIsPeripheralConnected] = useState('');
 
   const value = {
     peripheralId,
     setPeripheralId,
+    peripheralConnected,
+    setIsPeripheralConnected,
   };
 
   return (

@@ -3,6 +3,7 @@ export default {
   black: '#000000',
   grey: '#747474',
   lightGrey: '#C3C3C3',
+  lightWhite: 'rgba(255, 255, 255, 0.1)',
   block: {
     red: '#C02828',
     blue: '#5B8FDA',
@@ -15,6 +16,16 @@ export default {
   yellow: '#F5E74F',
   green: '#8ECF44',
   red: '#B11413',
+  headerBg: {
+    blue: '#E9EDF3',
+    red: '#F5EDED',
+    yellow: '#FCFCF0',
+    green: '##F2F9EA',
+    // blue: 'rgba(16, 49, 199, 0.2)',
+    // red: 'rgba(177, 20, 19, 0.2)',
+    // yellow: 'rgba(245, 231, 79, 0.2)',
+    // green: 'rgba(142, 207, 68, 0.2)',
+  },
   labelBg: '#C3C3C3',
   slider: {
     maxTrack: '#E8C1C5',

@@ -7,7 +7,7 @@ export default StyleSheet.create({
     width: '90%',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
     borderRadius: 5,
     borderWidth: 2,
     padding: 10,
@@ -16,7 +16,10 @@ export default StyleSheet.create({
   title: {
     color: COLORS.grey,
     fontSize: 35,
-    fontWeight: '600',
+    fontWeight: 'bold',
+  },
+  buttonWrapper: {
+    marginLeft: 50,
   },
   image: {
     width: 80,

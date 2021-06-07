@@ -31,7 +31,7 @@ const App = (props) => {
   const peripherals = new Map();
   const [testMode, setTestMode] = useState('write');
 
-  const { setPeripheralId } = usePeripheral();
+  const { setPeripheralId, setIsPeripheralConnected } = usePeripheral();
 
   const startScan = () => {
     BleManager.start({ showAlert: false });
@@ -40,20 +40,25 @@ const App = (props) => {
     if (isScanning) {
       return;
     }
+    // peripherals.clear();
 
     // first, clear existing peripherals
-    peripherals.clear();
     setList(Array.from(peripherals.values()));
 
     console.log('List from startScan -->>', list);
     console.log('Peripherals from startScan -->>', peripherals);
 
     // then re-scan it
-    BleManager.scan([], 3, true)
-      .then((res) => {
+    BleManager.scan([], 3, false)
+      .then(() => {
         console.log('Scanning...');
-        console.log('Scanning response -->>', res);
+
         setIsScanning(true);
+
+        BleManager.getDiscoveredPeripherals([]).then((peripheralsArray) => {
+          // Success code
+          console.log('Discovered peripherals: ' + peripheralsArray);
+        });
       })
       .catch((err) => {
         console.error(err);
@@ -65,25 +70,10 @@ const App = (props) => {
       return;
     }
 
-    console.log('Peripheral -->>', peripheral);
-
     if (deviceTypes.includes(peripheral?.name)) {
       peripherals.set(peripheral.id, peripheral);
       setList(Array.from(peripherals.values()));
     }
-
-    // if (
-    //   peripheral?.name === 'Stimulated' ||
-    //   'Surrounded' ||
-    //   'Spread' ||
-    //   'Jumped'
-    // ) {
-    //   peripherals.set(peripheral.id, peripheral);
-    //   setList(Array.from(peripherals.values()));
-    // }
-
-    // peripherals.set(peripheral.id, peripheral);
-    // setList(Array.from(peripherals.values()));
   };
 
   const handleStopScan = () => {
@@ -97,6 +87,8 @@ const App = (props) => {
 
     if (peripheral) {
       peripheral.connected = false;
+      setIsPeripheralConnected(false);
+
       peripherals.set(peripheral.id, peripheral);
 
       setList(Array.from(peripherals.values()));
@@ -112,8 +104,6 @@ const App = (props) => {
   };
 
   useEffect(() => {
-    // startScan();
-
     BleManager.start({ showAlert: false });
 
     bleEmitter.addListener(
@@ -217,6 +207,7 @@ const App = (props) => {
         console.log('Connected to ' + peripheral.id, peripheral);
 
         setPeripheralId(peripheral.id);
+        setIsPeripheralConnected(true);
         // update connected attribute
         updatePeripheral(peripheral, (p) => {
           p.connected = true;
@@ -236,6 +227,7 @@ const App = (props) => {
         });
       })
       .catch((error) => {
+        setIsPeripheralConnected(false);
         console.log('Connection error', error);
       });
   };

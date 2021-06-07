@@ -1,0 +1,4 @@
+label -> Mode   -      Peak    -    Display
+         sound         off          fields
+         jump          on           rainbow
+         snoezelen                  window

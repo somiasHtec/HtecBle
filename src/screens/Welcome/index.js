@@ -35,6 +35,7 @@ const Home = (props) => {
   const deviceConnectDebounce = useDebouncedCallback(
     (item) => {
       navigate(item.name, { peripheralId: item.id, writeToPeripheral });
+      // navigate('Jumped', { peripheralId: item.id, writeToPeripheral });
     },
 
     100,
@@ -45,7 +46,9 @@ const Home = (props) => {
     deviceConnectDebounce(item);
   };
 
-  const renderItem = ({ item }) => {
+  const renderItem = (item) => {
+    console.log({ item });
+
     const itemImage = item.name.toLowerCase();
 
     return (
@@ -63,6 +66,11 @@ const Home = (props) => {
     );
   };
 
+  const items = {
+    name: 'Stimulated',
+    id: '82255442-9fdc-11e9-a2a3-2a2ae2dbcce4',
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <TouchableOpacity onPress={startScan} style={styles.wallpaperWrapper}>
@@ -70,6 +78,7 @@ const Home = (props) => {
       </TouchableOpacity>
 
       <View style={styles.devicesContainer}>
+        {/* {renderItem(items)} */}
         <FlatList
           data={listData}
           renderItem={renderItem}

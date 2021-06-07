@@ -2,19 +2,23 @@ import React from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 
 import styles from './styles';
-import { IMAGES } from '~/assets';
+import { IMAGES, COLORS } from '~/assets';
 
 const Header = (props) => {
-  const { title, onPress, writeToPeripheral } = props;
+  const { title, onPress, onLongPress, border } = props;
 
-  const handleOnLongPress = () => {
-    //   writeToPeripheral()
-  };
+  const borderColor = { borderColor: COLORS[border] };
+  const bgColor = { backgroundColor: COLORS.headerBg[border] };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, borderColor, bgColor]}>
       <Text style={styles.title}>{title}</Text>
-      <TouchableOpacity onPress={onPress} onLongPress={handleOnLongPress}>
+
+      <TouchableOpacity
+        onPress={onPress}
+        onLongPress={onLongPress}
+        style={styles.buttonWrapper}
+      >
         <Image source={IMAGES.logoSquare} style={styles.image} />
       </TouchableOpacity>
     </View>

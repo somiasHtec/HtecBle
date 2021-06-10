@@ -2,6 +2,7 @@ export default {
   white: '#ffffff',
   black: '#000000',
   grey: '#747474',
+  lightWhite: 'rgba(255, 255, 255, 0.1)',
   lightGrey: '#C3C3C3',
   block: {
     red: '#C02828',
@@ -21,4 +22,14 @@ export default {
   },
   lightGreen: '#B7D6D4',
   darkGreen: '#388175',
+  headerBg: {
+    blue: '#E9EDF3',
+    red: '#F5EDED',
+    yellow: '#FCFCF0',
+    green: '##F2F9EA',
+    // blue: 'rgba(16, 49, 199, 0.2)',
+    // red: 'rgba(177, 20, 19, 0.2)',
+    // yellow: 'rgba(245, 231, 79, 0.2)',
+    // green: 'rgba(142, 207, 68, 0.2)',
+  },
 };

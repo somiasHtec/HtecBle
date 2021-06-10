@@ -11,8 +11,8 @@ export default StyleSheet.create({
   },
   sliderStyle: {
     width: width * 0.85,
-    height: 40,
-    marginVertical: 15,
+    // height: 40,
+    // marginVertical: 15,
   },
   valueWrapper: {
     flexDirection: 'row',
